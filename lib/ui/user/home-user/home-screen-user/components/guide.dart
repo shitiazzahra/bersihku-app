@@ -6,8 +6,20 @@ class Guide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    double fontSizeText = screenWidth < 360 ? 10 : 11;
+    double fontSizeButton = screenWidth < 360 ? 9 : 10;
+    double imageWidth = screenWidth < 360 ? 70 : 90;
+    double imageHeight = screenWidth < 360 ? 85 : 105;
+    double paddingHorizontal = screenWidth * 0.05;
+    double paddingVertical = screenWidth * 0.04;
+
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      padding: EdgeInsets.symmetric(
+        horizontal: paddingHorizontal,
+        vertical: paddingVertical,
+      ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -20,15 +32,15 @@ class Guide extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Mengatur ukuran font lebih besar dan menggunakan overflow
                 Text(
                   "Pelajari cara menggunakan aplikasi ini untuk melaporkan dan memantau pengangkutan sampah dengan mudah!",
                   style: TextStyle(
-                    fontSize: 11,
+                    fontSize: fontSizeText,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                   maxLines: 4,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: 10),
                 ElevatedButton(
@@ -42,35 +54,35 @@ class Guide extends StatelessWidget {
                   },
                   style: ElevatedButton.styleFrom(
                     elevation: 0,
-                    backgroundColor: Color(0xFF4EBAE5),
+                    backgroundColor: const Color(0xFF4EBAE5),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(6),
                     ),
                     padding: EdgeInsets.symmetric(
-                        horizontal: 18, vertical: 6), // Mengurangi padding
+                      horizontal: 16,
+                      vertical: 6,
+                    ),
                   ),
                   child: Text(
                     "Panduan Penggunaan Aplikasi",
                     style: TextStyle(
-                      fontSize:
-                          10, 
+                      fontSize: fontSizeButton,
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
                     ),
-                    overflow:
-                        TextOverflow.ellipsis, // Agar teks tidak terpotong
-                    softWrap: false, // Agar teks tetap dalam satu baris
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: false,
                   ),
                 ),
               ],
             ),
           ),
-          SizedBox(width: 1),
+          SizedBox(width: 10),
           // Gambar di kanan
           Image.asset(
             "assets/images/guide(2).png",
-            width: 90,
-            height: 105,
+            width: imageWidth,
+            height: imageHeight,
             fit: BoxFit.contain,
           ),
         ],

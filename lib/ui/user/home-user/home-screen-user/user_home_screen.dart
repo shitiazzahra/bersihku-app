@@ -35,87 +35,85 @@ class _UserHomeScreenState extends State<UserHomeScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    double screenWidth = size.width;
+Widget build(BuildContext context) {
+  Size size = MediaQuery.of(context).size;
+  double screenWidth = size.width;
+  double screenHeight = size.height;
 
-    return Scaffold(
-      backgroundColor: const Color(0xFF4EBAE5),
-      body: _selectedIndex == 0
-          ? Container(
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/blue-pettern.png"),
-                  fit: BoxFit.cover,
-                ),
+  return Scaffold(
+    backgroundColor: const Color(0xFF4EBAE5),
+    body: _selectedIndex == 0
+        ? Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/blue-pettern.png"),
+                fit: BoxFit.cover,
               ),
-              child: SafeArea(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: screenWidth * 0.05,
-                    vertical: 15,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Obx(
-                        () {
-                          final userName = userHomeController.user.value!.name??
-                              "User"; // Ambil user ID dari Firebase Authentication
+            ),
+            child: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: screenWidth * 0.05,
+                  vertical: screenHeight * 0.02,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Obx(() {
+                      final userName = userHomeController.user.value?.name ?? "User";
 
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Hai, $userName 👋🏻", // Menggunakan userName yang diambil dari Firebase
-                                    style: const TextStyle(
-                                      fontSize: 22,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const Text(
-                                    "Siap menjemput sampah hari ini?",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
+                              Text(
+                                "Hai, $userName 👋🏻",
+                                style: TextStyle(
+                                  fontSize: screenWidth * 0.055,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                "Siap menjemput sampah hari ini?",
+                                style: TextStyle(
+                                  fontSize: screenWidth * 0.04,
+                                  color: Colors.white,
+                                ),
                               ),
                             ],
-                          );
-                        },
+                          ),
+                        ],
+                      );
+                    }),
+                    SizedBox(height: screenHeight * 0.03),
+                    const Guide(),
+                    SizedBox(height: screenHeight * 0.025),
+                    Text(
+                      "Drop In",
+                      style: TextStyle(
+                        fontSize: screenWidth * 0.06,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
-                      SizedBox(height: screenWidth * 0.06),
-                      const Guide(),
-                      SizedBox(height: screenWidth * 0.05),
-                      const Text(
-                        "Drop In",
-                        style: TextStyle(
-                          fontSize: 24,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      const Report(),
-                      const SizedBox(height: 24),
-                      const Constraints(),
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: screenHeight * 0.03),
+                    const Report(),
+                    SizedBox(height: screenHeight * 0.03),
+                    const Constraints(),
+                  ],
                 ),
               ),
-            )
-          : _widgetOptions[
-              _selectedIndex], //titik dua itu adalah repersentasi dari ternari operator di flutter, tampilkan widget berdasarkan index
-      bottomNavigationBar: BottomNavBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
-      ),
-    );
-  }
+            ),
+          )
+        : _widgetOptions[_selectedIndex],
+    bottomNavigationBar: BottomNavBar(
+      selectedIndex: _selectedIndex,
+      onItemTapped: _onItemTapped,
+    ),
+  );
+}
+
 }

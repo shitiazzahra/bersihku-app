@@ -14,8 +14,16 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    // Ukuran responsif berdasarkan lebar layar
+    double iconSize = screenWidth < 400 ? 24 : 30;
+    double fontSize = screenWidth < 400 ? 12 : 14;
+    double paddingHorizontal = screenWidth < 400 ? 8 : 12;
+    double paddingVertical = screenWidth < 400 ? 8 : 10;
+
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -32,15 +40,23 @@ class BottomNavBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildNavItem(Icons.home_filled, "Home", 0),
-          _buildNavItem(Icons.history, "Riwayat", 1),
-          _buildNavItem(Icons.person_outline_outlined, "Profil", 2),
+          _buildNavItem(Icons.home_filled, "Home", 0, iconSize, fontSize, paddingHorizontal, paddingVertical),
+          _buildNavItem(Icons.history, "Riwayat", 1, iconSize, fontSize, paddingHorizontal, paddingVertical),
+          _buildNavItem(Icons.person_outline_outlined, "Profil", 2, iconSize, fontSize, paddingHorizontal, paddingVertical),
         ],
       ),
     );
   }
 
-  Widget _buildNavItem(IconData icon, String label, int index) {
+  Widget _buildNavItem(
+    IconData icon,
+    String label,
+    int index,
+    double iconSize,
+    double fontSize,
+    double paddingHorizontal,
+    double paddingVertical,
+  ) {
     bool isSelected = selectedIndex == index;
 
     return GestureDetector(
@@ -55,7 +71,10 @@ class BottomNavBar extends StatelessWidget {
             child: AnimatedContainer(
               duration: Duration(milliseconds: 200),
               curve: Curves.easeInOut,
-              padding: EdgeInsets.symmetric(horizontal: isSelected ? 12 : 0, vertical: 10),
+              padding: EdgeInsets.symmetric(
+                horizontal: isSelected ? paddingHorizontal : 0,
+                vertical: paddingVertical,
+              ),
               decoration: BoxDecoration(
                 color: isSelected ? Color(0xFFF66D06) : Colors.transparent,
                 borderRadius: BorderRadius.circular(14),
@@ -64,7 +83,7 @@ class BottomNavBar extends StatelessWidget {
                 children: [
                   Icon(
                     icon,
-                    size: 30,
+                    size: iconSize,
                     color: isSelected ? Colors.white : Colors.grey,
                   ),
                   AnimatedSize(
@@ -77,7 +96,7 @@ class BottomNavBar extends StatelessWidget {
                               label,
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 14,
+                                fontSize: fontSize,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
