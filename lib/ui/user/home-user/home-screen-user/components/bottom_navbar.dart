@@ -16,14 +16,14 @@ class BottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
-    // Ukuran responsif berdasarkan lebar layar
+ 
     double iconSize = screenWidth < 400 ? 24 : 30;
     double fontSize = screenWidth < 400 ? 12 : 14;
-    double paddingHorizontal = screenWidth < 400 ? 8 : 12;
-    double paddingVertical = screenWidth < 400 ? 8 : 10;
+    double paddingHorizontal = screenWidth < 400 ? 12 : 12;
+    double paddingVertical = screenWidth < 400 ? 12 : 10;
 
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
